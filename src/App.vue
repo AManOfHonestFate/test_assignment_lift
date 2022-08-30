@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div class="bg-black">ayp</div>
 </template>
 
 <script>
