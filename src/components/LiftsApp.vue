@@ -1,20 +1,22 @@
 <template>
   <div class="flex justify-center items-center m-12">
-    <div class="w-full border-4 border-neutral-900 bg-neutral-100 total-height solid-lines">
-
+    <div class="flex w-full border-4 border-neutral-900 bg-neutral-100 total-height solid-lines">
+      <LiftShaft v-for="shaft in numberOfLifts" :key="shaft"></LiftShaft>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
+import LiftShaft from "@/components/LiftShaft";
 export default {
   name: "LiftsApp",
-  components: {},
+  components: {LiftShaft},
   computed: {
     ...mapState({
       floorHeight: state => state.floorHeight + 'rem',
-      numberOfFloors: state => state.numberOfFloors
+      numberOfFloors: state => state.numberOfFloors,
+      numberOfLifts: state => state.numberOfLifts
     }),
     ...mapGetters([
         'totalHeight'

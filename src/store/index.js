@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    numberOfLifts: 1,
+    numberOfLifts: 4,
     numberOfFloors: 5,
     floorsPerSecond: 1,
     restTime: 3,
