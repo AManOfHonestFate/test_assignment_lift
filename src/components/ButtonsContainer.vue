@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 import LiftButton from "@/components/LiftButton";
 
 export default {
   name: "ButtonsContainer",
-  components: {LiftButton},
+  components: { LiftButton },
   computed: mapState({
-      buttons: state => state.buttonStatuses.length
-  })
-}
+    buttons: (state) => state.buttonStatuses.length,
+  }),
+};
 </script>

@@ -10,38 +10,35 @@
 </template>
 
 <script>
-import { mapState, mapGetters, useStore } from 'vuex';
-import {onMounted, watch} from "vue";
+import { mapState, mapGetters, useStore } from "vuex";
+import { onMounted, watch } from "vue";
 import LiftShaft from "@/components/LiftShaft";
 import LiftCab from "@/components/LiftCab";
 import ButtonsContainer from "@/components/ButtonsContainer";
 
 export default {
   name: "LiftsApp",
-  components: {ButtonsContainer, LiftCab, LiftShaft},
+  components: { ButtonsContainer, LiftCab, LiftShaft },
   computed: {
     ...mapState({
-      floorHeight: state => state.floorHeight + 'rem',
-      numberOfFloors: state => state.numberOfFloors,
-      lifts: state => state.liftsStatuses.length
+      floorHeight: (state) => state.floorHeight + "rem",
+      numberOfFloors: (state) => state.numberOfFloors,
+      lifts: (state) => state.liftsStatuses.length,
     }),
-    ...mapGetters([
-        'totalHeight'
-    ])
+    ...mapGetters(["totalHeight"]),
   },
   setup() {
     const store = useStore();
 
-
     onMounted(() => {
-      store.commit('setButtonStatuses');
-      store.commit('setLiftStatuses');
+      store.commit("setButtonStatuses");
+      store.commit("setLiftStatuses");
     });
 
     // starts finding free lifts and activates them
-    watch(store.state.callQueue, () => store.dispatch('resolveLifts'));
-  }
-}
+    watch(store.state.callQueue, () => store.dispatch("resolveLifts"));
+  },
+};
 </script>
 
 <style scoped>
