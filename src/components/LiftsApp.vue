@@ -2,7 +2,7 @@
   <div class="flex justify-center items-center m-12">
     <div class="flex w-full bg-neutral-100 total-height solid-lines">
       <LiftShaft v-for="lift in lifts" :key="lift">
-        <LiftCab></LiftCab>
+        <LiftCab :id="lift - 1"></LiftCab>
       </LiftShaft>
       <ButtonsContainer></ButtonsContainer>
     </div>
@@ -37,11 +37,7 @@ export default {
       store.commit('setLiftStatuses');
     });
 
-    function resolveLifts() {
-
-    }
-
-    watch(store.state.callQueue, resolveLifts)
+    watch(store.state.callQueue, () => store.dispatch('resolveLifts'));
   }
 }
 </script>

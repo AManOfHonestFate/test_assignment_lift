@@ -23,7 +23,7 @@ export default {
     const status = computed(() => store.state.buttonStatuses[props.id]);
 
     function addToQueue() {
-      store.commit('addToQueue', props.id);
+      store.dispatch('addToQueue', props.id);
     }
 
     return {
