@@ -1,13 +1,17 @@
 <template>
-  <div class="bg-black">ayp</div>
+  <LiftsApp></LiftsApp>
 </template>
 
 <script>
-
+import LiftsApp from "@/components/LiftsApp";
 export default {
   name: "App",
-  components: {},
+  components: {LiftsApp},
 };
 </script>
 
-<style></style>
+<style>
+body {
+  @apply bg-slate-900;
+}
+</style>

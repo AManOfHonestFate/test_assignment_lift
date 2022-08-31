@@ -7,9 +7,14 @@ export default createStore({
     floorsPerSecond: 1,
     restTime: 3,
     callQueue: [],
-    liftsStatuses: []
+    liftsStatuses: [],
+    floorHeight: 6
   },
-  getters: {},
+  getters: {
+    totalHeight(state) {
+      return `${state.numberOfFloors * state.floorHeight}rem`;
+    }
+  },
   mutations: {},
   actions: {},
   modules: {},
