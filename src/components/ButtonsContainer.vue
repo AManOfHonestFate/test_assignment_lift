@@ -14,10 +14,8 @@ import LiftButton from "@/components/LiftButton";
 export default {
   name: "ButtonsContainer",
   components: {LiftButton},
-  computed: {
-    ...mapState({
+  computed: mapState({
       buttons: state => state.buttonStatuses.length
-    })
-  }
+  })
 }
 </script>

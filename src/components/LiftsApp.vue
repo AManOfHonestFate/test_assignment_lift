@@ -32,11 +32,13 @@ export default {
   setup() {
     const store = useStore();
 
+
     onMounted(() => {
       store.commit('setButtonStatuses');
       store.commit('setLiftStatuses');
     });
 
+    // starts finding free lifts and activates them
     watch(store.state.callQueue, () => store.dispatch('resolveLifts'));
   }
 }
@@ -51,8 +53,18 @@ export default {
 .total-height {
   height: v-bind(totalHeight);
 }
+</style>
 
-:global(.floor-height) {
+<style>
+body {
+  @apply bg-slate-900;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.floor-height {
   height: v-bind(floorHeight);
 }
 </style>

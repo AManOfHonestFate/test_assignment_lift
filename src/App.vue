@@ -9,13 +9,3 @@ export default {
   components: {LiftsApp},
 };
 </script>
-
-<style>
-body {
-  @apply bg-slate-900;
-}
-
-* {
-  box-sizing: border-box;
-}
-</style>

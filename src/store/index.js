@@ -2,14 +2,18 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    // global settings
     numberOfLifts: 3,
     numberOfFloors: 5,
     floorsPerSecond: 1,
     restTime: 3,  // sec
+    floorHeight: 5.5,   // rem
+
+    // local states
+    // saving in localStorage
     callQueue: [],
     liftsStatuses: [],
     buttonStatuses: [],
-    floorHeight: 5.5   // rem
   },
   getters: {
     totalHeight(state) {

@@ -19,10 +19,12 @@ export default {
     ...mapState({
       floorsPerSecond: state => state.floorsPerSecond,
       floorHeight: state => state.floorHeight,
+      target(state) {return state.liftsStatuses[this.id].targetFloor},
+      current(state) {return state.liftsStatuses[this.id].currentFloor},
+      resting(state) {return state.liftsStatuses[this.id].resting},
     }),
-    target() {return this.$store.state.liftsStatuses[this.id].targetFloor},
-    current() {return this.$store.state.liftsStatuses[this.id].currentFloor},
-    resting() {return this.$store.state.liftsStatuses[this.id].resting},
+
+    // dynamic css values
     translate() {
       return '-' + this.target * this.floorHeight + 'rem';
     },
