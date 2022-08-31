@@ -1,17 +1,21 @@
 <template>
   <div class="flex justify-center items-center m-12">
-    <div class="flex w-full border-4 border-neutral-900 bg-neutral-100 total-height solid-lines">
-      <LiftShaft v-for="shaft in numberOfLifts" :key="shaft"></LiftShaft>
+    <div class="flex w-full bg-neutral-100 total-height solid-lines">
+      <LiftShaft v-for="shaft in numberOfLifts" :key="shaft">
+        <LiftCab></LiftCab>
+      </LiftShaft>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, useStore } from 'vuex';
+import {onMounted} from "vue";
 import LiftShaft from "@/components/LiftShaft";
+import LiftCab from "@/components/LiftCab";
 export default {
   name: "LiftsApp",
-  components: {LiftShaft},
+  components: {LiftCab, LiftShaft},
   computed: {
     ...mapState({
       floorHeight: state => state.floorHeight + 'rem',
@@ -21,6 +25,11 @@ export default {
     ...mapGetters([
         'totalHeight'
     ])
+  },
+  setup() {
+    const store = useStore();
+
+    onMounted(() => store.commit('setStatuses'));
   }
 }
 </script>
