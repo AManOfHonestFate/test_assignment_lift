@@ -17,16 +17,36 @@ export default createStore({
     }
   },
   mutations: {
-    setStatuses(state) {
-      if (localStorage.statuses) {
+    setLiftStatuses(state) {
+      if (localStorage.liftStatuses) {
         return;
       }
 
       const statuses = [];
-      for (let i in 4) {
-        statuses.push({ id: i, targetFloor: 1});
+      for (let i = 0; i < state.numberOfLifts; i++) {
+        statuses.push({ id: i, currentFloor: 1, targetFloor: 1, resting: false});
       }
       state.liftsStatuses = statuses;
+    },
+    setButtonStatuses(state) {
+      if (localStorage.buttonStatuses) {
+        return;
+      }
+
+      const statuses = [];
+      for (let i = 0; i < state.numberOfFloors; i++) {
+        statuses.push({ id: i, pressed: false});
+      }
+      state.buttonStatuses = statuses;
+    },
+    addToQueue(state, id) {
+      if (id in state.callQueue) return;
+
+      state.buttonStatuses[id].pressed = true;
+      state.callQueue.push(id);
+    },
+    activateLift(state, id, target) {
+      state.liftsStatuses[id].target = target;
     }
   },
   actions: {},

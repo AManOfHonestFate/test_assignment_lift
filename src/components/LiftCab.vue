@@ -1,5 +1,7 @@
 <template>
-  <div class="w-24 mx-1 cab-height rounded-2xl bg-indigo-600 outline outline-2 outline-neutral-900 box-border translate-lift"></div>
+  <div class="w-24 floor-height px-2 pt-2 translate-lift">
+    <div class="h-full rounded-2xl bg-indigo-600 outline outline-2 outline-neutral-900 box-border"></div>
+  </div>
 </template>
 
 <script>
@@ -7,24 +9,16 @@ import {mapState} from "vuex";
 
 export default {
   name: "LiftCab",
-  data() {
-    return {translate: 0}
+  props: {
+    id: Number
   },
-  computed: {
-    ...mapState({
-      cabHeight: state => state.floorHeight + "rem"
-    }),
-  },
+  computed: mapState({floorsPerSecond: state => state.floorsPerSecond + 's'}),
 }
 </script>
 
 <style scoped>
-.cab-height {
-  height: v-bind(cabHeight);
-}
-
 .translate-lift {
-  transition: transform 1s linear;
+  transition: transform v-bind(floorsPerSecond) linear;
   transform: translateY(v-bind(translate));
 }
 </style>
