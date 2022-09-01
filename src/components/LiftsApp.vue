@@ -11,7 +11,7 @@
 
 <script>
 import { mapState, mapGetters, useStore } from "vuex";
-import { onMounted, watch } from "vue";
+import { onMounted } from "vue";
 import LiftShaft from "@/components/LiftShaft";
 import LiftCab from "@/components/LiftCab";
 import ButtonsContainer from "@/components/ButtonsContainer";
@@ -36,13 +36,22 @@ export default {
 
     // initializes app states
     onMounted(() => {
-      store.commit("setButtonStatuses");
-      store.commit("setLiftStatuses");
+      store.dispatch('loadLocalStates');
+      store.dispatch('resolveLifts');
     });
+
+    // saves local states
+    window.addEventListener('beforeunload', () => {
+      store.dispatch('saveLocalStates');
+    })
 
     // watches for call queue
     // starts finding free lifts and activates them
-    watch(store.state.callQueue, () => store.dispatch("resolveLifts"));
+    store.watch(
+        (state) => state.callQueue,
+        () => store.dispatch('resolveLifts'),
+        {deep: true}
+    );
   },
 };
 </script>

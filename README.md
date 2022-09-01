@@ -1,4 +1,6 @@
 # test_assignment_lift
+## Settings
+Adjust settings in vuex state
 
 ## Project setup
 ```
