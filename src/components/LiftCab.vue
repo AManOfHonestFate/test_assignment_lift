@@ -1,17 +1,24 @@
 <template>
   <div class="w-24 floor-height px-2 pt-2 pb-1 translate-lift">
     <div
-      class="h-full rounded-2xl bg-indigo-600 outline outline-2 outline-neutral-900 box-border"
+      class="flex h-full rounded-2xl bg-gray-500 outline outline-2 outline-neutral-900 box-border"
       :class="{ 'animate-pulse': resting }"
-    ></div>
+    >
+      <LiftIndicator
+          :target-floor="target + 1"
+          :direction="target > current ? 'up' : (target < current ? 'down' : 'none')"
+      ></LiftIndicator>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import LiftIndicator from "@/components/LiftIndicator";
 
 export default {
   name: "LiftCab",
+  components: {LiftIndicator},
   props: {
     id: Number,
   },
