@@ -20,21 +20,27 @@ export default {
   name: "LiftsApp",
   components: { ButtonsContainer, LiftCab, LiftShaft },
   computed: {
+    // values from store
     ...mapState({
+      // floor height for dynamic css
       floorHeight: (state) => state.floorHeight + "rem",
-      numberOfFloors: (state) => state.numberOfFloors,
+
+      // number of lifts for v-for
       lifts: (state) => state.liftsStatuses.length,
     }),
+    // total height for dynamic css
     ...mapGetters(["totalHeight"]),
   },
   setup() {
     const store = useStore();
 
+    // initializes app states
     onMounted(() => {
       store.commit("setButtonStatuses");
       store.commit("setLiftStatuses");
     });
 
+    // watches for call queue
     // starts finding free lifts and activates them
     watch(store.state.callQueue, () => store.dispatch("resolveLifts"));
   },

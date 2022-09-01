@@ -16,9 +16,13 @@ export default {
     id: Number,
   },
   computed: {
+    // values from store
     ...mapState({
+      // values for css
       floorsPerSecond: (state) => state.floorsPerSecond,
       floorHeight: (state) => state.floorHeight,
+
+      // lift status
       target(state) {
         return state.liftsStatuses[this.id].targetFloor;
       },
@@ -31,9 +35,11 @@ export default {
     }),
 
     // dynamic css values
+    // translateY value
     translate() {
       return "-" + this.target * this.floorHeight + "rem";
     },
+    // and transition time
     time() {
       return (
         Math.abs(this.floorsPerSecond * (this.target - this.current)) + "s"

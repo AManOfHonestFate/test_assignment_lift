@@ -26,8 +26,11 @@ export default {
   },
   setup(props) {
     const store = useStore();
+
+    // gets its status from store
     const status = computed(() => store.state.buttonStatuses[props.id]);
 
+    // dispatches action on click
     function addToQueue() {
       store.dispatch("addToQueue", props.id);
     }

@@ -9,7 +9,7 @@ export default createStore({
     restTime: 3, // sec
     floorHeight: 5.5, // rem
 
-    // local states
+    // app states
     // saving in localStorage
     callQueue: [],
     liftsStatuses: [],
@@ -59,32 +59,43 @@ export default createStore({
   },
   actions: {
     activateLift({ state, dispatch }, { id, target }) {
+      // activates lift
       const lift = state.liftsStatuses[id];
-
       lift.targetFloor = target;
 
+      // waits for lift to stop
       setTimeout(() => {
+
+        // then lift starts to rest
         lift.resting = true;
         lift.currentFloor = target;
         state.buttonStatuses[target].pressed = false;
 
         setTimeout(() => {
+          // when rest time is over
+          // resets lift
           lift.resting = false;
+          // and resolve lifts again
           dispatch("resolveLifts");
         }, 3000);
       }, Math.abs(lift.targetFloor - lift.currentFloor) * state.floorsPerSecond * 1000);
     },
     addToQueue({ state, getters }, id) {
+      // checks if the button can be pressed
       if (state.callQueue.includes(id)) return;
       if (getters.floorsWithLifts.has(id)) return;
 
+      // presses the button and adds call to queue
       state.buttonStatuses[id].pressed = true;
       state.callQueue.push(id);
     },
     resolveLifts({ state, getters, dispatch }) {
+
+      // checks if there's free lifts and call queue
       if (!state.callQueue.length) return;
       if (!getters.freeLifts.length) return;
 
+      // finds the closest lift
       const targetFloor = state.callQueue[0];
       let min = state.numberOfFloors;
       let minId = 0;
@@ -96,6 +107,7 @@ export default createStore({
         }
       }
 
+      // deletes current call from queue and activates lift
       state.callQueue.shift();
       dispatch("activateLift", { id: minId, target: targetFloor });
     },
