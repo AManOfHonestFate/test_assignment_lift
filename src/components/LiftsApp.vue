@@ -36,21 +36,21 @@ export default {
 
     // initializes app states
     onMounted(() => {
-      store.dispatch('loadLocalStates');
-      store.dispatch('resolveLifts');
+      store.dispatch("loadLocalStates");
+      store.dispatch("resolveLifts");
     });
 
     // saves local states
-    window.addEventListener('beforeunload', () => {
-      store.dispatch('saveLocalStates');
-    })
+    window.addEventListener("beforeunload", () => {
+      store.dispatch("saveLocalStates");
+    });
 
     // watches for call queue
     // starts finding free lifts and activates them
     store.watch(
-        (state) => state.callQueue,
-        () => store.dispatch('resolveLifts'),
-        {deep: true}
+      (state) => state.callQueue,
+      () => store.dispatch("resolveLifts"),
+      { deep: true }
     );
   },
 };

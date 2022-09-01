@@ -5,8 +5,10 @@
       :class="{ 'animate-pulse': resting }"
     >
       <LiftIndicator
-          :target-floor="target + 1"
-          :direction="target > current ? 'up' : (target < current ? 'down' : 'none')"
+        :target-floor="target + 1"
+        :direction="
+          target > current ? 'up' : target < current ? 'down' : 'none'
+        "
       ></LiftIndicator>
     </div>
   </div>
@@ -18,7 +20,7 @@ import LiftIndicator from "@/components/LiftIndicator";
 
 export default {
   name: "LiftCab",
-  components: {LiftIndicator},
+  components: { LiftIndicator },
   props: {
     id: Number,
   },

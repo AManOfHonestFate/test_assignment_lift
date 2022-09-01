@@ -26,14 +26,13 @@ export default createStore({
   mutations: {
     // commits on mounted of lift app
     setLiftStatuses(state) {
-
       // checks local storage for saved state
       if (localStorage.liftStatuses) {
         state.liftsStatuses = JSON.parse(localStorage.liftStatuses);
-        state.liftsStatuses.forEach(lift => {
+        state.liftsStatuses.forEach((lift) => {
           lift.currentFloor = lift.targetFloor;
           lift.resting = false;
-        })
+        });
         return;
       }
 
@@ -51,15 +50,14 @@ export default createStore({
     },
     // commits on mounted of lift app
     setButtonStatuses(state) {
-
       // checks local storage for saved state
       if (localStorage.buttonStatuses) {
         state.buttonStatuses = JSON.parse(localStorage.buttonStatuses);
-        state.buttonStatuses.forEach(button => {
+        state.buttonStatuses.forEach((button) => {
           if (!state.callQueue.includes(button.id)) {
             button.pressed = false;
           }
-        })
+        });
         return;
       }
 
@@ -75,22 +73,22 @@ export default createStore({
       if (localStorage.queue) {
         state.callQueue = JSON.parse(localStorage.queue);
       }
-    }
+    },
   },
   actions: {
     loadLocalStates({ commit }) {
-      commit('setQueue');
-      commit('setButtonStatuses');
-      commit('setLiftStatuses');
+      commit("setQueue");
+      commit("setButtonStatuses");
+      commit("setLiftStatuses");
     },
     saveLocalStates({ state }) {
       localStorage.buttonStatuses = JSON.stringify(state.buttonStatuses);
       localStorage.liftStatuses = JSON.stringify(state.liftsStatuses);
       localStorage.queue = JSON.stringify(state.callQueue);
-    }
+    },
   },
   modules: {
     queue,
-    liftsLogic
+    liftsLogic,
   },
 });
